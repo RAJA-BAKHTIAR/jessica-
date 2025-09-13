@@ -2,176 +2,110 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>💑 Him vs Her Quiz</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Him vs Her Quiz 💖</title>
   <style>
     body {
-      font-family: "Poppins", sans-serif;
-      background: linear-gradient(135deg, #f54ea2, #ff7676);
+      font-family: Arial, sans-serif;
+      background: linear-gradient(to right, #ff9a9e, #fad0c4);
       text-align: center;
-      padding: 40px;
-      overflow-x: hidden;
+      padding: 20px;
     }
-    h1 {
-      color: #fff;
-      font-size: 36px;
+    .quiz-box {
+      background: white;
+      padding: 20px;
+      border-radius: 15px;
+      box-shadow: 0px 4px 10px rgba(0,0,0,0.2);
+      max-width: 400px;
+      margin: auto;
+    }
+    h2 {
+      font-size: 20px;
       margin-bottom: 20px;
-      text-shadow: 2px 2px 5px rgba(0,0,0,0.3);
     }
-    .question {
-      font-size: 22px;
-      margin: 20px;
-      color: #fff;
-      font-weight: bold;
-    }
-    .options button {
-      background: #fff;
+    button {
+      margin: 8px;
+      padding: 10px 15px;
       border: none;
-      padding: 12px 25px;
-      margin: 10px;
-      font-size: 18px;
-      border-radius: 10px;
+      border-radius: 8px;
+      background: #ff6b81;
+      color: white;
       cursor: pointer;
+      font-size: 16px;
       transition: 0.3s;
-      box-shadow: 0px 3px 6px rgba(0,0,0,0.2);
     }
-    .options button:hover {
-      background: #ff4d6d;
-      color: #fff;
-      transform: scale(1.05);
+    button:hover {
+      background: #ff4757;
     }
-    .message {
-      font-size: 22px;
-      margin-top: 15px;
-      color: #fff;
-      font-weight: bold;
-    }
-    .heart {
-      position: fixed;
-      font-size: 24px;
-      animation: fall 3s linear forwards;
-      color: red;
-      pointer-events: none;
-    }
-    @keyframes fall {
-      0% { transform: translateY(-50px); opacity: 1; }
-      100% { transform: translateY(100vh); opacity: 0; }
-    }
-    .progress {
-      width: 80%;
-      margin: 20px auto;
-      height: 20px;
-      border-radius: 10px;
-      background: rgba(255,255,255,0.4);
-      overflow: hidden;
-    }
-    .progress-bar {
-      height: 100%;
-      width: 0;
-      background: #ff4d6d;
-      transition: width 0.5s;
-    }
+    .correct { color: green; font-weight: bold; }
+    .wrong { color: red; font-weight: bold; }
+    #nextBtn { margin-top: 15px; background: #1e90ff; }
   </style>
 </head>
 <body>
-  <h1>💞 Him vs Her Quiz 💞</h1>
 
-  <div id="quiz">
-    <div class="progress"><div id="progress-bar" class="progress-bar"></div></div>
-    <div class="question" id="question"></div>
-    <div class="options" id="options"></div>
-    <div class="message" id="message"></div>
+  <div class="quiz-box">
+    <h2 id="question">Loading...</h2>
+    <div id="options"></div>
+    <p id="feedback"></p>
+    <button id="nextBtn" onclick="nextQuestion()">Next ➡</button>
   </div>
 
   <script>
     const quizData = [
-      { q: "😴 Who sleeps more?", o: ["Him", "Her"], a: "Him", r: "Haha yes, I’m the sleepyhead 😴" },
-      { q: "🍕 Who eats more junk food?", o: ["Him", "Her"], a: "Her", r: "Correct! You’re the snack queen 🍟🍫" },
-      { q: "😂 Who laughs at silly jokes first?", o: ["Him", "Her"], a: "Him", r: "Me! I laugh at anything 😂" },
-      { q: "📱 Who spends more time on the phone?", o: ["Him", "Her"], a: "Him", r: "Yes, guilty 😅" },
-      { q: "🕐 Who takes longer to reply?", o: ["Him", "Her"], a: "Her", r: "Correct! You reply late but cute 💌" },
-      { q: "😳 Who gets shy faster?", o: ["Him", "Her"], a: "Him", r: "It’s me… but shhh 🤫" },
-      { q: "🎶 Who sings randomly?", o: ["Him", "Her"], a: "Him", r: "Correct! I sing like a radio 🎤😂" },
-      { q: "📸 Who takes more selfies?", o: ["Him", "Her"], a: "Her", r: "Yes! But I take selfies only to send you ❤️" },
-      { q: "🤯 Who gets jealous quicker?", o: ["Him", "Her"], a: "Him", r: "Correct! I get jealous because I love you 😍" },
-      { q: "🐼 Who is cuter?", o: ["Him", "Her", "Both"], a: "Her", r: "You’re the cutest panda 🐼💖" },
-      { q: "🛏 Who wakes up later?", o: ["Him", "Her"], a: "Her", r: "Correct! You sleep in longer 😴❤️" },
-      { q: "🌍 Who wants to travel more?", o: ["Him", "Her"], a: "Him", r: "Yes! I always dream of adventures with you 🌍" },
-      { q: "💖 Who says 'I love you' first usually?", o: ["Him", "Her", "Both"], a: "Both", r: "Both — love is equal 💕" },
-      { q: "😂 Who starts random fights first?", o: ["Him", "Her", "Both"], a: "Both", r: "Haha both, but fights = more love after 😘" }
+      { q: "Who sleeps more?", options: ["Him", "Her"], correct: "Him" },
+      { q: "Who eats more junk food?", options: ["Him", "Her"], correct: "Her" },
+      { q: "Who laughs at silly jokes first?", options: ["Him", "Her"], correct: "Him" },
+      { q: "Who spends more time on the phone?", options: ["Him", "Her"], correct: "Him" },
+      { q: "Who takes longer to reply?", options: ["Him", "Her"], correct: "Her" },
+      { q: "Who gets shy faster?", options: ["Him", "Her"], correct: "Him" }, // hidden truth 😉
+      { q: "Who sings randomly?", options: ["Him", "Her"], correct: "Him" },
+      { q: "Who takes more selfies?", options: ["Him", "Her"], correct: "Her" },
+      { q: "Who gets jealous quicker?", options: ["Him", "Her"], correct: "Him" },
+      { q: "Who is cuter?", options: ["Him", "Her", "Both"], correct: "Her" },
+      { q: "Who wakes up later?", options: ["Him", "Her"], correct: "Her" },
+      { q: "Who wants to travel more?", options: ["Him", "Her"], correct: "Him" },
+      { q: "Who says 'I love you' first usually?", options: ["Him", "Her", "Both"], correct: "Both" },
+      { q: "Who starts random fights first?", options: ["Him", "Her", "Both"], correct: "Both" }
     ];
 
     let currentQuestion = 0;
-    let score = 0;
 
-    function showQuestion() {
-      const q = quizData[currentQuestion];
-      document.getElementById("question").textContent = q.q;
-      document.getElementById("options").innerHTML = "";
-      q.o.forEach(option => {
-        const btn = document.createElement("button");
-        btn.textContent = option;
-        btn.onclick = () => checkAnswer(option);
-        document.getElementById("options").appendChild(btn);
+    function loadQuestion() {
+      let qData = quizData[currentQuestion];
+      document.getElementById("question").innerText = qData.q;
+      let optionsHTML = "";
+      qData.options.forEach(opt => {
+        optionsHTML += `<button onclick="checkAnswer('${opt}')">${opt}</button>`;
       });
-      let progressPercent = (currentQuestion / quizData.length) * 100;
-      document.getElementById("progress-bar").style.width = progressPercent + "%";
+      document.getElementById("options").innerHTML = optionsHTML;
+      document.getElementById("feedback").innerText = "";
     }
 
-    function checkAnswer(selected) {
-      const q = quizData[currentQuestion];
-      if (q.a === "Both" || selected === q.a) {
-        score++;
-        document.getElementById("message").textContent = q.r;
-        spawnHearts();
+    function checkAnswer(answer) {
+      let correct = quizData[currentQuestion].correct;
+      let feedback = document.getElementById("feedback");
+      if (answer === correct) {
+        feedback.innerHTML = "✅ Correct! " + answer + " it is.";
+        feedback.className = "correct";
       } else {
-        document.getElementById("message").textContent = "Oops! Try again 😅";
+        feedback.innerHTML = "❌ Nope! Correct answer is: " + correct;
+        feedback.className = "wrong";
       }
+    }
 
+    function nextQuestion() {
       currentQuestion++;
       if (currentQuestion < quizData.length) {
-        setTimeout(() => {
-          document.getElementById("message").textContent = "";
-          showQuestion();
-        }, 2000);
+        loadQuestion();
       } else {
-        setTimeout(() => {
-          document.getElementById("quiz").innerHTML =
-            `<h2>🎉 Quiz Over 🎉<br>
-             Score: ${score}/${quizData.length}<br><br>
-             💌 Final Note 💌<br>
-             Doesn’t matter who wins — You’re my forever ❤️</h2>
-             <button onclick="location.reload()">🔄 Play Again</button>`;
-          floatingEmojis();
-        }, 2500);
+        document.querySelector(".quiz-box").innerHTML = "<h2>🎉 Quiz Finished! You know us so well 💖</h2>";
       }
     }
 
-    function spawnHearts() {
-      for (let i = 0; i < 8; i++) {
-        let heart = document.createElement("div");
-        heart.className = "heart";
-        heart.textContent = "❤️";
-        heart.style.left = Math.random() * window.innerWidth + "px";
-        document.body.appendChild(heart);
-        setTimeout(() => heart.remove(), 3000);
-      }
-    }
-
-    function floatingEmojis() {
-      const emojis = ["❤️","💋","😍","💌","🌹"];
-      setInterval(() => {
-        let e = document.createElement("div");
-        e.className = "heart";
-        e.textContent = emojis[Math.floor(Math.random()*emojis.length)];
-        e.style.left = Math.random() * window.innerWidth + "px";
-        document.body.appendChild(e);
-        setTimeout(() => e.remove(), 4000);
-      }, 300);
-    }
-
-    // Start quiz
-    showQuestion();
+    // Load first question
+    loadQuestion();
   </script>
+
 </body>
 </html>
-
