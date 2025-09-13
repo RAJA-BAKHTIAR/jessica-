@@ -2,20 +2,20 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Couple Quiz Game 💖</title>
+  <title>💞 Couple Quiz Game</title>
   <style>
     body {
       font-family: "Poppins", sans-serif;
-      background: linear-gradient(135deg, #ff758c, #ff7eb3);
+      background: linear-gradient(135deg, #f7971e, #ffd200);
       text-align: center;
       padding: 40px;
       overflow-x: hidden;
     }
     h1 {
       color: #fff;
-      font-size: 38px;
+      font-size: 36px;
       margin-bottom: 20px;
-      text-shadow: 2px 2px 5px rgba(0,0,0,0.2);
+      text-shadow: 2px 2px 5px rgba(0,0,0,0.3);
     }
     .question {
       font-size: 22px;
@@ -27,21 +27,21 @@
       background: #fff;
       border: none;
       padding: 12px 25px;
-      margin: 12px;
+      margin: 10px;
       font-size: 18px;
-      border-radius: 12px;
+      border-radius: 10px;
       cursor: pointer;
       transition: 0.3s;
-      box-shadow: 0px 4px 6px rgba(0,0,0,0.2);
+      box-shadow: 0px 3px 6px rgba(0,0,0,0.2);
     }
     .options button:hover {
-      background: #ff4d6d;
+      background: #f44336;
       color: #fff;
       transform: scale(1.05);
     }
     .message {
       font-size: 22px;
-      margin-top: 20px;
+      margin-top: 15px;
       color: #fff;
       font-weight: bold;
     }
@@ -67,13 +67,13 @@
     .progress-bar {
       height: 100%;
       width: 0;
-      background: #ff4d6d;
+      background: #f44336;
       transition: width 0.5s;
     }
   </style>
 </head>
 <body>
-  <h1>💑 Our Couple Quiz 💑</h1>
+  <h1>💑 Our Special Couple Quiz 💑</h1>
 
   <div id="quiz">
     <div class="progress"><div id="progress-bar" class="progress-bar"></div></div>
@@ -84,14 +84,26 @@
 
   <script>
     const quizData = [
-      { q: "💖 Who said 'I love you' first?", o: ["Me", "You"], a: "Me", r: "Yes! That’s me 😘" },
-      { q: "🍫 What’s your favorite chocolate?", o: ["KitKat", "Dairy Milk", "Ferrero Rocher"], a: "Dairy Milk", r: "Correct! Dairy Milk ❤️" },
-      { q: "📅 Our anniversary month?", o: ["January", "June", "August"], a: "June", r: "You never forget 🥰" },
-      { q: "📱 Who texts 'good night' first?", o: ["Me", "You"], a: "You", r: "Yes, you’re the sweetest 💕" },
-      { q: "🏞 Dream trip together?", o: ["Bali", "Paris", "Dubai"], a: "Bali", r: "Yes Bali! Ocean + love 🌊❤️" },
-      { q: "😂 Who laughs louder?", o: ["Me", "You"], a: "You", r: "Hehe your laugh is my favorite 😍" },
-      { q: "☕ Favorite drink?", o: ["Tea", "Coffee", "Juice"], a: "Coffee", r: "Coffee = late night talks ☕❤️" },
-      { q: "💍 Will you marry me?", o: ["Yes", "Of course"], a: "Yes", r: "Forever yours 💍" }
+      { q: "💞 Who gets jealous more?", o: ["Me", "You"], a: "both", r: "Haha both of us, because we care too much 😍" },
+      { q: "😳 Who blushes first?", o: ["Me", "You"], a: "both", r: "Both, and that’s why we’re so cute together 🥰" },
+      { q: "💌 Who writes sweeter texts?", o: ["Me", "You"], a: "both", r: "Honestly, both of us are love poets ✍️❤️" },
+      { q: "🤗 Who hugs tighter?", o: ["Me", "You"], a: "both", r: "We both hug like we’ll never let go 💕" },
+      { q: "😂 Who makes the other laugh more?", o: ["Me", "You"], a: "both", r: "We both can’t stop laughing when we’re together 😆" },
+      { q: "🍲 If we cook together, who will burn the food?", o: ["Me", "You"], a: "You", r: "Haha yes, kitchen on fire 🔥😅" },
+      { q: "🎮 Who is better at games?", o: ["Me", "You"], a: "Me", r: "That’s right! I’ll always win 😎" },
+      { q: "🎧 Who listens to more music?", o: ["Me", "You"], a: "You", r: "Correct! Your playlists are endless 🎶❤️" },
+      { q: "🌙 Who stays awake longer texting?", o: ["Me", "You"], a: "both", r: "Both! Nights feel short when we chat 🌙💌" },
+      { q: "🌍 Where would we rather go first?", o: ["Beach", "Mountains"], a: "Beach", r: "Beach! Because love + sunset = perfect 🌅" },
+      { q: "🐼 Who acts cuter?", o: ["Me", "You"], a: "both", r: "Both! We’re the cutest couple ever 🐼❤️" },
+      { q: "😋 Who eats more snacks?", o: ["Me", "You"], a: "You", r: "Correct! You never stop munching 🍟🍫" },
+      { q: "📱 Who uses phone more?", o: ["Me", "You"], a: "You", r: "Haha yes, you’re always scrolling 😂" },
+      { q: "🛏 Who falls asleep faster?", o: ["Me", "You"], a: "Me", r: "Yes, I knock out instantly 😴" },
+      { q: "📸 Who takes more selfies?", o: ["Me", "You"], a: "You", r: "Correct! Your selfies always slay 💖" },
+      { q: "💍 Who will propose first?", o: ["Me", "You"], a: "Me", r: "It’s my job to propose ❤️💍" },
+      { q: "🎂 Who forgets birthdays?", o: ["Me", "You"], a: "Me", r: "Oops guilty 🙈 but I’ll never forget yours!" },
+      { q: "🌹 Who is more romantic?", o: ["Me", "You"], a: "both", r: "Both — we love each other too much ❤️" },
+      { q: "😡 Who gets angry faster?", o: ["Me", "You"], a: "Me", r: "Yes, but you always calm me down 🥺❤️" },
+      { q: "💖 Who loves more?", o: ["Me", "You"], a: "both", r: "Both. Love is equal and forever 💞" }
     ];
 
     let currentQuestion = 0;
@@ -107,13 +119,13 @@
         btn.onclick = () => checkAnswer(option);
         document.getElementById("options").appendChild(btn);
       });
-      let progressPercent = ((currentQuestion) / quizData.length) * 100;
+      let progressPercent = (currentQuestion / quizData.length) * 100;
       document.getElementById("progress-bar").style.width = progressPercent + "%";
     }
 
     function checkAnswer(selected) {
       const q = quizData[currentQuestion];
-      if (selected === q.a) {
+      if (q.a === "both" || selected === q.a) {
         score++;
         document.getElementById("message").textContent = q.r;
         spawnHearts();
@@ -130,18 +142,18 @@
       } else {
         setTimeout(() => {
           document.getElementById("quiz").innerHTML =
-            `<h2>🎉 Game Over 🎉<br>
+            `<h2>🎉 Quiz Finished 🎉<br>
              Score: ${score}/${quizData.length}<br><br>
-             💌 My Love Letter 💌<br>
-             You’re the best thing in my life.<br>
-             I choose you again and again ❤️</h2>`;
+             💌 Final Note 💌<br>
+             No matter who wins… you are my forever. ❤️</h2>
+             <button onclick="location.reload()">🔄 Play Again</button>`;
           floatingEmojis();
         }, 2500);
       }
     }
 
     function spawnHearts() {
-      for (let i = 0; i < 10; i++) {
+      for (let i = 0; i < 8; i++) {
         let heart = document.createElement("div");
         heart.className = "heart";
         heart.textContent = "❤️";
@@ -163,7 +175,7 @@
       }, 300);
     }
 
-    // Start quiz immediately
+    // Start quiz
     showQuestion();
   </script>
 </body>
