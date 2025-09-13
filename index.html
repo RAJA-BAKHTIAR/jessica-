@@ -16,7 +16,7 @@
       padding: 20px;
       border-radius: 15px;
       box-shadow: 0px 4px 10px rgba(0,0,0,0.2);
-      max-width: 400px;
+      max-width: 450px;
       margin: auto;
     }
     h2 {
@@ -37,8 +37,10 @@
     button:hover {
       background: #ff4757;
     }
-    .correct { color: green; font-weight: bold; }
-    .wrong { color: red; font-weight: bold; }
+    .message { 
+      font-weight: bold; 
+      margin-top: 15px;
+    }
     #nextBtn { margin-top: 15px; background: #1e90ff; }
   </style>
 </head>
@@ -47,26 +49,127 @@
   <div class="quiz-box">
     <h2 id="question">Loading...</h2>
     <div id="options"></div>
-    <p id="feedback"></p>
+    <p id="feedback" class="message"></p>
     <button id="nextBtn" onclick="nextQuestion()">Next ➡</button>
   </div>
 
   <script>
     const quizData = [
-      { q: "Who sleeps more?", options: ["Him", "Her"], correct: "Him" },
-      { q: "Who eats more junk food?", options: ["Him", "Her"], correct: "Her" },
-      { q: "Who laughs at silly jokes first?", options: ["Him", "Her"], correct: "Him" },
-      { q: "Who spends more time on the phone?", options: ["Him", "Her"], correct: "Him" },
-      { q: "Who takes longer to reply?", options: ["Him", "Her"], correct: "Her" },
-      { q: "Who gets shy faster?", options: ["Him", "Her"], correct: "Him" }, // hidden truth 😉
-      { q: "Who sings randomly?", options: ["Him", "Her"], correct: "Him" },
-      { q: "Who takes more selfies?", options: ["Him", "Her"], correct: "Her" },
-      { q: "Who gets jealous quicker?", options: ["Him", "Her"], correct: "Him" },
-      { q: "Who is cuter?", options: ["Him", "Her", "Both"], correct: "Her" },
-      { q: "Who wakes up later?", options: ["Him", "Her"], correct: "Her" },
-      { q: "Who wants to travel more?", options: ["Him", "Her"], correct: "Him" },
-      { q: "Who says 'I love you' first usually?", options: ["Him", "Her", "Both"], correct: "Both" },
-      { q: "Who starts random fights first?", options: ["Him", "Her", "Both"], correct: "Both" }
+      { q: "Who sleeps more?", 
+        options: ["Him", "Her"], 
+        correct: "Him",
+        messages: {
+          "Him": "Haha yes! I’m always the sleepyhead 😴❤️",
+          "Her": "Nooo, you’re not the sleepyhead, it’s me 😆💤"
+        }
+      },
+      { q: "Who eats more junk food?", 
+        options: ["Him", "Her"], 
+        correct: "Her",
+        messages: {
+          "Him": "Really? I’m not the junk food monster 😜",
+          "Her": "Yep! You can’t resist yummy snacks 🍟🍫"
+        }
+      },
+      { q: "Who laughs at silly jokes first?", 
+        options: ["Him", "Her"], 
+        correct: "Him",
+        messages: {
+          "Him": "Haha true! I laugh at the dumbest stuff 😂",
+          "Her": "Nooo, you keep a straight face too long 😆"
+        }
+      },
+      { q: "Who spends more time on the phone?", 
+        options: ["Him", "Her"], 
+        correct: "Him",
+        messages: {
+          "Him": "Guilty 😅 scrolling forever 📱",
+          "Her": "Nahh, you’re the patient one 💕"
+        }
+      },
+      { q: "Who takes longer to reply?", 
+        options: ["Him", "Her"], 
+        correct: "Her",
+        messages: {
+          "Him": "Not meee, I reply fast for you 😍",
+          "Her": "Yesss, sometimes you disappear too long ⏳❤️"
+        }
+      },
+      { q: "Who gets shy faster?", 
+        options: ["Him", "Her"], 
+        correct: "Him",
+        messages: {
+          "Him": "Don’t expose me! I blush too easy 🙈❤️",
+          "Her": "Hehe nope, you’re the bold one 😉"
+        }
+      },
+      { q: "Who sings randomly?", 
+        options: ["Him", "Her"], 
+        correct: "Him",
+        messages: {
+          "Him": "Haha true, I’m your personal singer 🎶❤️",
+          "Her": "Nopeee, your voice is my favorite 🎤💕"
+        }
+      },
+      { q: "Who takes more selfies?", 
+        options: ["Him", "Her"], 
+        correct: "Her",
+        messages: {
+          "Him": "I only take them to send to YOU 📸❤️",
+          "Her": "Yes! You’re the selfie queen 👑✨"
+        }
+      },
+      { q: "Who gets jealous quicker?", 
+        options: ["Him", "Her"], 
+        correct: "Him",
+        messages: {
+          "Him": "Okay okay, I admit it… I’m protective 😅💖",
+          "Her": "Not you, you’re the calm one 😘"
+        }
+      },
+      { q: "Who is cuter?", 
+        options: ["Him", "Her", "Both"], 
+        correct: "Her",
+        messages: {
+          "Him": "Hehe nooo, you’re the real cutie 🥺❤️",
+          "Her": "Of course, my princess is the cutest 😍👑",
+          "Both": "Well true… we’re the cutest couple 💑✨"
+        }
+      },
+      { q: "Who wakes up later?", 
+        options: ["Him", "Her"], 
+        correct: "Her",
+        messages: {
+          "Him": "Nooo, I get up first to annoy you 😆",
+          "Her": "Yes, my sleepy beauty 🌸😴"
+        }
+      },
+      { q: "Who wants to travel more?", 
+        options: ["Him", "Her"], 
+        correct: "Him",
+        messages: {
+          "Him": "Yesss, I’ll take you everywhere 🌍✈️",
+          "Her": "No wayyy, you’re the one with wanderlust ❤️"
+        }
+      },
+      { q: "Who says 'I love you' first usually?", 
+        options: ["Him", "Her", "Both"], 
+        correct: "Both",
+        messages: {
+          "Him": "True sometimes! But you say it too 💕",
+          "Her": "Haha yess, but I never let you beat me 😘",
+          "Both": "Yesss, we both rush to say it ❤️❤️"
+        }
+      },
+      { q: "Who starts random fights first?", 
+        options: ["Him", "Her", "Both"], 
+        correct: "Both",
+        messages: {
+          "Him": "Sometimes me… but always cute fights 😅❤️",
+          "Her": "Hehe sometimes you start too 🙊💕",
+          "Both": "Yesss, both of us… but we make up fast 💖"
+        }
+      }
     ];
 
     let currentQuestion = 0;
@@ -83,15 +186,8 @@
     }
 
     function checkAnswer(answer) {
-      let correct = quizData[currentQuestion].correct;
-      let feedback = document.getElementById("feedback");
-      if (answer === correct) {
-        feedback.innerHTML = "✅ Correct! " + answer + " it is.";
-        feedback.className = "correct";
-      } else {
-        feedback.innerHTML = "❌ Nope! Correct answer is: " + correct;
-        feedback.className = "wrong";
-      }
+      let qData = quizData[currentQuestion];
+      document.getElementById("feedback").innerText = qData.messages[answer];
     }
 
     function nextQuestion() {
