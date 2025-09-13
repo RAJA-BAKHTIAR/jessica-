@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Couple Quiz Game 💖</title>
+  <style>
+    body {
+      font-family: "Segoe UI", sans-serif;
+      background: linear-gradient(135deg, #ff9a9e, #fad0c4);
+      text-align: center;
+      padding: 40px;
+      overflow-x: hidden;
+    }
+    h1 { color: #fff; font-size: 36px; margin-bottom: 20px; }
+    .question { font-size: 22px; margin: 20px; color: #fff; }
+    .options button {
+      background: #fff; border: none; padding: 12px 25px;
+      margin: 10px; font-size: 18px; border-radius: 12px;
+      cursor: pointer; transition: 0.3s;
+      box-shadow: 0px 4px 6px rgba(0,0,0,0.2);
+    }
+    .options button:hover { background: #ff4d6d; color: #fff; }
+    .message { font-size: 22px; margin-top: 20px; color: #fff; font-weight: bold; }
+    .heart {
+      position: fixed; font-size: 24px;
+      animation: fall 3s linear forwards; color: red;
+    }
+    @keyframes fall {
+      0% { transform: translateY(-50px); opacity: 1; }
+      100% { transform: translateY(100vh); opacity: 0; }
+    }
+    .progress {
+      width: 80%; margin: 20px auto; height: 20px;
+      border-radius: 10px; background: rgba(255,255,255,0.5);
+      overflow: hidden;
+    }
+    .progress-bar {
+      height: 100%; width: 0; background: #ff4d6d;
+      transition: width 0.5s;
+    }
+  </style>
+</head>
+<body>
+  <h1>💑 Our Secret Couple Quiz 💑</h1>
+  <p style="color:white;font-size:18px">👉 Type <b>090</b> anywhere to start the game!</p>
+
+  <div id="quiz" style="display:none;">
+    <div class="progress"><div id="progress-bar" class="progress-bar"></div></div>
+    <div class="question" id="question"></div>
+    <div class="options" id="options"></div>
+    <div class="message" id="message"></div>
+  </div>
+
+  <script>
+    const quizData = [
+      { q: "💖 Who said 'I love you' first?", o: ["Me", "You"], a: "Me", r: "Yes! That’s me 😘" },
+      { q: "🍫 What’s your favorite chocolate?", o: ["KitKat", "Dairy Milk", "Ferrero Rocher"], a: "Dairy Milk", r: "Correct! Dairy Milk ❤️" },
+      { q: "📅 Our anniversary month?", o: ["January", "June", "August"], a: "June", r: "You never forget 🥰" },
+      { q: "📱 Who texts 'good night' first?", o: ["Me", "You"], a: "You", r: "Yes, you’re the sweetest 💕" },
+      { q: "🏞 Dream trip together?", o: ["Bali", "Paris", "Dubai"], a: "Bali", r: "Yes Bali! Ocean + love 🌊❤️" },
+      { q: "💍 Will you marry me?", o: ["Yes", "Of course"], a: "Yes", r: "Forever yours 💍" }
+    ];
+
+    let currentQuestion = 0, score = 0, active = false;
+
+    function showQuestion() {
+      document.getElementById("quiz").style.display = "block";
+      const q = quizData[currentQuestion];
+      document.getElementById("question").textContent = q.q;
+      document.getElementById("options").innerHTML = "";
+      q.o.forEach(option => {
+        const btn = document.createElement("button");
+        btn.textContent = option;
+        btn.onclick = () => checkAnswer(option);
+        document.getElementById("options").appendChild(btn);
+      });
+      let progressPercent = ((currentQuestion) / quizData.length) * 100;
+      document.getElementById("progress-bar").style.width = progressPercent + "%";
+    }
+
+    function checkAnswer(selected) {
+      const q = quizData[currentQuestion];
+      if (selected === q.a) {
+        score++; document.getElementById("message").textContent = q.r; spawnHearts();
+      } else {
+        document.getElementById("message").textContent = "Oops! Try again 😅";
+      }
+      currentQuestion++;
+      if (currentQuestion < quizData.length) {
+        setTimeout(() => { document.getElementById("message").textContent = ""; showQuestion(); }, 2000);
+      } else {
+        setTimeout(() => {
+          document.getElementById("quiz").innerHTML =
+            `<h2>🎉 Game Over 🎉<br>
+             Score: ${score}/${quizData.length}<br>
+             You’re my soulmate forever ❤️</h2>`;
+          floatingEmojis();
+        }, 2500);
+      }
+    }
+
+    function spawnHearts() {
+      for (let i = 0; i < 10; i++) {
+        let heart = document.createElement("div");
+        heart.className = "heart"; heart.textContent = "❤️";
+        heart.style.left = Math.random() * window.innerWidth + "px";
+        document.body.appendChild(heart);
+        setTimeout(() => heart.remove(), 3000);
+      }
+    }
+
+    function floatingEmojis() {
+      const emojis = ["❤️","💋","😍","💌","🌹"];
+      setInterval(() => {
+        let e = document.createElement("div");
+        e.className = "heart"; e.textContent = emojis[Math.floor(Math.random()*emojis.length)];
+        e.style.left = Math.random() * window.innerWidth + "px";
+        document.body.appendChild(e);
+        setTimeout(() => e.remove(), 4000);
+      }, 300);
+    }
+
+    // 🔑 Secret Code Trigger (type "090")
+    let codeBuffer = "";
+    document.addEventListener("keydown", (e) => {
+      codeBuffer += e.key;
+      if (codeBuffer.endsWith("090") && !active) {
+        active = true;
+        codeBuffer = "";
+        showQuestion();
+      }
+      if (codeBuffer.length > 5) codeBuffer = codeBuffer.slice(-5);
+    });
+  </script>
+</body>
+</html>
