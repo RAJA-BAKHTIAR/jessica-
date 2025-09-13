@@ -2,11 +2,11 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>💞 Couple Quiz Game</title>
+  <title>💑 Him vs Her Quiz</title>
   <style>
     body {
       font-family: "Poppins", sans-serif;
-      background: linear-gradient(135deg, #f7971e, #ffd200);
+      background: linear-gradient(135deg, #f54ea2, #ff7676);
       text-align: center;
       padding: 40px;
       overflow-x: hidden;
@@ -35,7 +35,7 @@
       box-shadow: 0px 3px 6px rgba(0,0,0,0.2);
     }
     .options button:hover {
-      background: #f44336;
+      background: #ff4d6d;
       color: #fff;
       transform: scale(1.05);
     }
@@ -67,13 +67,13 @@
     .progress-bar {
       height: 100%;
       width: 0;
-      background: #f44336;
+      background: #ff4d6d;
       transition: width 0.5s;
     }
   </style>
 </head>
 <body>
-  <h1>💑 Our Special Couple Quiz 💑</h1>
+  <h1>💞 Him vs Her Quiz 💞</h1>
 
   <div id="quiz">
     <div class="progress"><div id="progress-bar" class="progress-bar"></div></div>
@@ -84,26 +84,20 @@
 
   <script>
     const quizData = [
-      { q: "💞 Who gets jealous more?", o: ["Me", "You"], a: "both", r: "Haha both of us, because we care too much 😍" },
-      { q: "😳 Who blushes first?", o: ["Me", "You"], a: "both", r: "Both, and that’s why we’re so cute together 🥰" },
-      { q: "💌 Who writes sweeter texts?", o: ["Me", "You"], a: "both", r: "Honestly, both of us are love poets ✍️❤️" },
-      { q: "🤗 Who hugs tighter?", o: ["Me", "You"], a: "both", r: "We both hug like we’ll never let go 💕" },
-      { q: "😂 Who makes the other laugh more?", o: ["Me", "You"], a: "both", r: "We both can’t stop laughing when we’re together 😆" },
-      { q: "🍲 If we cook together, who will burn the food?", o: ["Me", "You"], a: "You", r: "Haha yes, kitchen on fire 🔥😅" },
-      { q: "🎮 Who is better at games?", o: ["Me", "You"], a: "Me", r: "That’s right! I’ll always win 😎" },
-      { q: "🎧 Who listens to more music?", o: ["Me", "You"], a: "You", r: "Correct! Your playlists are endless 🎶❤️" },
-      { q: "🌙 Who stays awake longer texting?", o: ["Me", "You"], a: "both", r: "Both! Nights feel short when we chat 🌙💌" },
-      { q: "🌍 Where would we rather go first?", o: ["Beach", "Mountains"], a: "Beach", r: "Beach! Because love + sunset = perfect 🌅" },
-      { q: "🐼 Who acts cuter?", o: ["Me", "You"], a: "both", r: "Both! We’re the cutest couple ever 🐼❤️" },
-      { q: "😋 Who eats more snacks?", o: ["Me", "You"], a: "You", r: "Correct! You never stop munching 🍟🍫" },
-      { q: "📱 Who uses phone more?", o: ["Me", "You"], a: "You", r: "Haha yes, you’re always scrolling 😂" },
-      { q: "🛏 Who falls asleep faster?", o: ["Me", "You"], a: "Me", r: "Yes, I knock out instantly 😴" },
-      { q: "📸 Who takes more selfies?", o: ["Me", "You"], a: "You", r: "Correct! Your selfies always slay 💖" },
-      { q: "💍 Who will propose first?", o: ["Me", "You"], a: "Me", r: "It’s my job to propose ❤️💍" },
-      { q: "🎂 Who forgets birthdays?", o: ["Me", "You"], a: "Me", r: "Oops guilty 🙈 but I’ll never forget yours!" },
-      { q: "🌹 Who is more romantic?", o: ["Me", "You"], a: "both", r: "Both — we love each other too much ❤️" },
-      { q: "😡 Who gets angry faster?", o: ["Me", "You"], a: "Me", r: "Yes, but you always calm me down 🥺❤️" },
-      { q: "💖 Who loves more?", o: ["Me", "You"], a: "both", r: "Both. Love is equal and forever 💞" }
+      { q: "😴 Who sleeps more?", o: ["Him", "Her"], a: "Him", r: "Haha yes, I’m the sleepyhead 😴" },
+      { q: "🍕 Who eats more junk food?", o: ["Him", "Her"], a: "Her", r: "Correct! You’re the snack queen 🍟🍫" },
+      { q: "😂 Who laughs at silly jokes first?", o: ["Him", "Her"], a: "Him", r: "Me! I laugh at anything 😂" },
+      { q: "📱 Who spends more time on the phone?", o: ["Him", "Her"], a: "Him", r: "Yes, guilty 😅" },
+      { q: "🕐 Who takes longer to reply?", o: ["Him", "Her"], a: "Her", r: "Correct! You reply late but cute 💌" },
+      { q: "😳 Who gets shy faster?", o: ["Him", "Her"], a: "Him", r: "It’s me… but shhh 🤫" },
+      { q: "🎶 Who sings randomly?", o: ["Him", "Her"], a: "Him", r: "Correct! I sing like a radio 🎤😂" },
+      { q: "📸 Who takes more selfies?", o: ["Him", "Her"], a: "Her", r: "Yes! But I take selfies only to send you ❤️" },
+      { q: "🤯 Who gets jealous quicker?", o: ["Him", "Her"], a: "Him", r: "Correct! I get jealous because I love you 😍" },
+      { q: "🐼 Who is cuter?", o: ["Him", "Her", "Both"], a: "Her", r: "You’re the cutest panda 🐼💖" },
+      { q: "🛏 Who wakes up later?", o: ["Him", "Her"], a: "Her", r: "Correct! You sleep in longer 😴❤️" },
+      { q: "🌍 Who wants to travel more?", o: ["Him", "Her"], a: "Him", r: "Yes! I always dream of adventures with you 🌍" },
+      { q: "💖 Who says 'I love you' first usually?", o: ["Him", "Her", "Both"], a: "Both", r: "Both — love is equal 💕" },
+      { q: "😂 Who starts random fights first?", o: ["Him", "Her", "Both"], a: "Both", r: "Haha both, but fights = more love after 😘" }
     ];
 
     let currentQuestion = 0;
@@ -125,7 +119,7 @@
 
     function checkAnswer(selected) {
       const q = quizData[currentQuestion];
-      if (q.a === "both" || selected === q.a) {
+      if (q.a === "Both" || selected === q.a) {
         score++;
         document.getElementById("message").textContent = q.r;
         spawnHearts();
@@ -142,10 +136,10 @@
       } else {
         setTimeout(() => {
           document.getElementById("quiz").innerHTML =
-            `<h2>🎉 Quiz Finished 🎉<br>
+            `<h2>🎉 Quiz Over 🎉<br>
              Score: ${score}/${quizData.length}<br><br>
              💌 Final Note 💌<br>
-             No matter who wins… you are my forever. ❤️</h2>
+             Doesn’t matter who wins — You’re my forever ❤️</h2>
              <button onclick="location.reload()">🔄 Play Again</button>`;
           floatingEmojis();
         }, 2500);
